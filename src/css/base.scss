@@ -147,13 +147,19 @@ footer {
           border-color: #2ecc71;
         }
     }
-    input[type = "submit"] {
+
+    #loginErrorArea {
+      transform: scale(1.1, 1.1);
+      transition: 0.2s;
+    }
+
+    #loginButton {
       border: 0;
-      background: none;
+      //background: none;
       display: block;
       margin: 20px auto;
       text-align: center;
-      border: 2px solid #2ecc71;
+      //border: 2px solid #2ecc71;
       padding: 14px 40px;
       outline: none;
       color: $secondary-background;
