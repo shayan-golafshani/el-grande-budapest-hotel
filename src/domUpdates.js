@@ -8,9 +8,17 @@ export let calendar = document.getElementById('calendar');
 export let roomDropDown = document.getElementById('roomDropDown');
 export let bookingHistory = document.getElementById('bookingHistory');
 export let mainCardsArea = document.getElementById("mainCardsArea");
+export let loginArea = document.getElementById('loginArea')
+export let usernameArea = document.getElementById('username');
+export let passwordArea = document.getElementById('password');
+export let loginButton = document.getElementById('loginButton');
+export let loginErrorArea = document.getElementById('loginErrorArea');
+export let hotelCheckInInfo = document.getElementById('hotelCheckInInfo');
+export let hotelImage = document.getElementById('hotelImage');
 
 export let renderUserInfo = (currCustomer, bookings, rooms) => {
-  
+  bookingHistory.innerHTML = '';
+
   guestName.innerText = currCustomer.name;
   totalSpent.innerText = currCustomer.viewCustomerTotalSpending(bookings.bookings, rooms.rooms);
   currCustomer.bookings.forEach(booking => {
@@ -22,11 +30,11 @@ export let renderUserInfo = (currCustomer, bookings, rooms) => {
   });
 
   //Filter based on calendar value
-  let date = calendar.value.split("-").join('/')
-  currCustomer.filterRoomAvailabilityByDate(date, bookings.bookings);
+//   let date = calendar.value.split("-").join('/')
+//   currCustomer.filterRoomAvailabilityByDate(date, bookings.bookings);
         
-  let availableRoomDetails = currCustomer.getAvailableRoomDetails(rooms.rooms)
-  renderRoomCards(availableRoomDetails);  
+//   let availableRoomDetails = currCustomer.getAvailableRoomDetails(rooms.rooms)
+//   renderRoomCards(availableRoomDetails);  
 
 }
 
@@ -39,6 +47,7 @@ export let renderRoomCards = (array) => {
      </p>
     `
   } else {
+    //displayRoomDetails.innerHTML = '';
     array.forEach((roomDetail, index) => {
       displayRoomDetails.innerHTML += `
              <div class="grid-item grid-item-${index}">
