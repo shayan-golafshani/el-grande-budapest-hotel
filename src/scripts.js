@@ -44,6 +44,16 @@ let searchForRoom = document.getElementById('sendIt');
 
 let startUpData = [];
 
+window.onload = loginServerCheck;
+
+function loginServerCheck() {
+  retrieveData(1)
+    .catch(err => {
+      console.log("Server Check is happening on load");
+      console.error(err)
+    })
+}
+
 function startUp(userID) {
   retrieveData(userID)
     .then(promise => {
@@ -54,7 +64,7 @@ function startUp(userID) {
       startUpData = [customers, currCustomer, rooms, bookings];
       console.log(startUpData, "HEY your data on startup");
       currCustomer = new Customer(currCustomer);
-
+      
       //import render info here...>>>>
       //the next four lines into a function maybe
       renderUserInfo(currCustomer, bookings, rooms);
@@ -148,8 +158,8 @@ let loginValidation = (e) => {
   e.preventDefault();
   let usernameInput = usernameArea.value
   let splitUsername =  usernameInput.split('r');
-//   console.log("This is your usernameINPUT", usernameInput)
-//   console.log("This is your username split", splitUsername)
+  //   console.log("This is your usernameINPUT", usernameInput)
+  //   console.log("This is your username split", splitUsername)
   let passwordInput = passwordArea.value;
   //console.log("THIS IS YOUR PASSWORD", passwordInput)
 
