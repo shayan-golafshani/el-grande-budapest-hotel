@@ -1,4 +1,22 @@
+import { loginButton, mainCardsArea } from "./domUpdates";
+
 let baseUrl = 'http://localhost:3001/api/v1/'
+
+/////////NIK's stolen code/////////////////////////////////
+const displayErrorMesssage = (err) => {
+  const errorField = mainCardsArea;
+  const message =
+    err.message === "Failed to fetch"
+      ? "Our network temporarily is down due to cyber attacks. Please call us or email us @ thegrandbudapest@gmail.com"
+      : err.message;
+  errorField.innerHTML = message;
+};
+
+const disableLoginButton = () => {
+  loginButton.setAttribute('disabled', 'true');
+  loginButton.style.background = "red";
+  loginButton.style.cursor = "not-allowed";
+}
 
 //***********************************ALL GET RELATED INFO ******************/
 
@@ -9,7 +27,13 @@ let getData = (endpoint, id) => {
       console.log(response)
       return response.json()
     })
-    .catch(err => console.log('Get didnt work!', err))
+    .catch(err => {
+      
+      disableLoginButton();
+      displayErrorMesssage(err)
+      console.log('Get didnt work!', err)
+      throw new Error();
+    })
 };
 
 //Make sure to double check the getData running with the userId, I can't run this whole method, unless I 
@@ -31,7 +55,11 @@ let sendData = (sentData, url) => {
   })
     .then(response => response.json())
     .then(json => console.log("Json post being sent from the apiCalls.js", json))
-    .catch(err => console.log(err));
+    .catch(err => {
+      displayErrorMesssage(err);
+      throw new Error();
+      //console.log(err)
+    });
 }
 
 //example postcall would be postData(bookingPost);
