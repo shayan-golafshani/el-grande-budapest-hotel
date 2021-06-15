@@ -29,29 +29,39 @@ import {
   renderUserInfo,
   renderRoomCards,
   mainCardsArea,
+  usernameArea,
+  passwordArea,
+  loginButton,
+  loginErrorArea,
+  loginArea,
+  hotelCheckInInfo,
+  hotelImage,
 } from './domUpdates';
 
 let testingBtn = document.querySelector('#testButton');
 let searchForRoom = document.getElementById('sendIt');
 //put event listeners on here. 
 
-window.onload = startUp();
 let startUpData = [];
 
-function startUp() {
-  retrieveData(1)
+function startUp(userID) {
+  retrieveData(userID)
     .then(promise => {
       let customers = promise[0];
       let currCustomer = promise[1];
       let rooms = promise[2];
       let bookings = promise[3];
       startUpData = [customers, currCustomer, rooms, bookings];
-      //console.log(promise);
       console.log(startUpData, "HEY your data on startup");
       currCustomer = new Customer(currCustomer);
 
       //import render info here...>>>>
+      //the next four lines into a function maybe
       renderUserInfo(currCustomer, bookings, rooms);
+      let date = calendar.value.split("-").join('/')
+      currCustomer.filterRoomAvailabilityByDate(date, bookings.bookings);
+      let availableRoomDetails = currCustomer.getAvailableRoomDetails(rooms.rooms)
+      renderRoomCards(availableRoomDetails); 
     }).catch(err => console.error("Error is happening scripts", err));
 }
 
@@ -85,9 +95,7 @@ let updateByRoomType = () => {
   let rooms =  startUpData[2];
   let bookings = startUpData[3];
 
-
   let date = calendar.value.split("-").join('/');
-  
 
   currCustomer.filterRoomAvailabilityByDate(date, bookings.bookings);
   //Filter based on the drop-down value
@@ -108,38 +116,61 @@ let bookRoom = (e) => {
     
   if (e.target.closest('button')) {
     let roomNumber = parseInt(e.target.closest('button').id)
-    let userID = startUpData[1].id; //suss
+    let userID = startUpData[1].id;
     let date = calendar.value.split("-").join('/');
-
-    
-
-
     let postableData = {
       userID,
       date,
       roomNumber,
     }
-
     console.log(postableData);
     postData(postableData).then(
-        response => console.log(response)
+      response => console.log(response)
     ).catch(err => {
-        console.error(err);
+      console.error(err);
     })
 
-    //console.log("This is the event", e.target.closest('button'));
     e.target.closest('button').setAttribute("disabled", "true");
     e.target.closest('button').innerText = "Booked!"
+
+    //re-render the user information in the sidebar
+    //after book button is disabled
+    let currCustomer = new Customer(startUpData[1]);
+    let bookings = startUpData[3];
+    let rooms =  startUpData[2];
+    renderUserInfo(currCustomer, bookings, rooms);
+  }
 }
 
+loginButton.addEventListener('click', (e) => loginValidation(e));
 
+let loginValidation = (e) => {
+  e.preventDefault();
+  let usernameInput = usernameArea.value
+  let splitUsername =  usernameInput.split('r');
+//   console.log("This is your usernameINPUT", usernameInput)
+//   console.log("This is your username split", splitUsername)
+  let passwordInput = passwordArea.value;
+  //console.log("THIS IS YOUR PASSWORD", passwordInput)
 
-  //customer id is startUpArr[1].id
-  //roomNumber is e.target.closest('button')
-  //date calendar.value.split("-").join('/')
-  //
-  /*
-    { "userID": 48, "date": "2019/09/23", "roomNumber": 4 }
+  if (passwordInput === 'overlook2021' 
+    && splitUsername[0] === 'custome' 
+    && (splitUsername[1] >= 1 && splitUsername[1] <= 50)) {
+    startUp(splitUsername[1]);
+    loginErrorArea.classList.add('hide');
+    loginArea.classList.add('hide');
+    hotelImage.classList.add('hide');
+    hotelCheckInInfo.classList.remove('hide');
+    //hide the main content area image of the hotel
+    //hide the contents & footer
+    // show the cards which are currently showing
+    //for now test this part
 
-     */
+    //console.log('SUCCESSFUL LOGIN!');
+  } else {
+    loginErrorArea.classList.remove('hide');
+  }
+  //hide the main content area, content1, content2, content3
+  //hide footer
+  //hide login
 }
