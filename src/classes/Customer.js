@@ -16,7 +16,7 @@ class Customer {
   }
 
   filterRoomAvailabilityByDate(date, bookings) {
-    //change name to unavailableRoomsByDate
+    //rename unavailableRoomsByDate
     //console.log(date, "DATE INSIDE METHOD *****")
     this.availableRoomNums = bookings.filter(booking => booking.date === date)
     .map(booking => booking.roomNumber)

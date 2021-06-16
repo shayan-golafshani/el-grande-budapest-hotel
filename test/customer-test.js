@@ -20,9 +20,12 @@ describe.only('Customer', () => {
     expect(Customer).to.be.a('function');
   });
 
-  it('Should have an id and a name', () => {
-    expect(customer1.id).to.equal(allCustomers[0].id);
+  it('Should have a name', () => {
     expect(customer1.name).to.equal(allCustomers[0].name);
+  });
+
+  it('Should have an id', () => {
+    expect(customer1.id).to.equal(allCustomers[0].id);
   });
 
   it('Should have a default totalSpent of 0, until tallied', () => {
@@ -34,30 +37,45 @@ describe.only('Customer', () => {
     expect(customer1.bookings).to.deep.equal([]);
   });
 
+  it('Should have an empty list of available room numbers by default', () => {
+    expect(customer1.availableRoomNums.length).to.equal(0);
+    expect(customer1.availableRoomNums).to.deep.equal([]);
+  });
+
+  it('Should have an empty list of available room numbers based on room type by default', () => {
+    expect(customer1.availableRoomNumsByType.length).to.equal(0);
+    expect(customer1.availableRoomNumsByType).to.deep.equal([]);
+  });
+
   it('Should return a list of room numbers for rooms that are available on only the booking date', () => {
     const roomNums = customer1.filterRoomAvailabilityByDate("2020/04/22", bookings)
    
-    const expectedRoomNums = [2, 3]; 
+    const expectedRoomNums = [1]; 
     expect(roomNums).to.deep.equal(expectedRoomNums);
   });
 
   it('Should show a list of all room details for the rooms available on the booking date', () => {
-    const roomDeets = [allRooms[1], allRooms[2]];
+    const roomDeets = [allRooms[1], allRooms[2], allRooms[3], allRooms[4], allRooms[5], allRooms[6], allRooms[7], allRooms[8], allRooms[9]];
     customer1.filterRoomAvailabilityByDate("2020/04/22", bookings);
     let roomDetails  = customer1.getAvailableRoomDetails(allRooms)
     expect(roomDetails).to.deep.equal(roomDeets);
   });
 
   it("Should filter a list of available rooms by roomType", () => {
-    const roomDeets = [allRooms[1], allRooms[2]];
+    const roomDeets = [allRooms[1], allRooms[2], allRooms[3], allRooms[4], allRooms[5], allRooms[6], allRooms[7], allRooms[8], allRooms[9]];
     customer1.filterRoomAvailabilityByDate("2020/04/22", bookings);
     let roomDetails  = customer1.getAvailableRoomDetails(allRooms)
     expect(roomDetails).to.deep.equal(roomDeets);
 
     let filteredByType = customer1.filterRoomsByRoomType(allRooms, "suite");
 
-    expect(filteredByType).to.deep.equal([allRooms[1]]);
-    expect(customer1.availableRoomNumsByType).to.deep.equal([allRooms[1].number]);
+    expect(filteredByType).to.deep.equal([allRooms[1], allRooms[9]]);
+    expect(customer1.availableRoomNumsByType).to.deep.equal([allRooms[1].number, allRooms[9].number]);
+  });
+
+  it("Should be able to store an array of all the customer's bookings", () => {
+    customer1.viewMyBookings(bookings);
+    expect(customer1.bookings).to.deep.equal([bookings[0]]);
   });
 
   it("Should be able to return an array of all the customer's bookings", () => {
@@ -65,16 +83,24 @@ describe.only('Customer', () => {
     expect(customerBookings).to.deep.equal([bookings[0]]);
   });
 
-  it('Should be able to return the total amount a specific customer has spent', () => {
-    let total = customer1.viewCustomerTotalSpending(bookings, allRooms);
+  it('Should be able to store the total amount a specific customer has spent', () => {
+    customer1.viewCustomerTotalSpending(bookings, allRooms);
     expect(customer1.totalSpent).to.equal(allRooms[0].costPerNight);
   });
 
+  it('Should be able to return the total amount a specific customer has spent', () => {
+    let total = customer1.viewCustomerTotalSpending(bookings, allRooms);
+    expect(total).to.equal(allRooms[0].costPerNight);
+  });
 
-  it("Should be able to check room availability", () => {
+  it("Should be able to check room availability and return true", () => {
     let bool = customer1.checkRoomAvailability("2020/04/22", bookings, allRooms, "suite");
-    let bool2 = customer2.checkRoomAvailability("2020/04/22", bookings, allRooms, "residential suite");
     expect(bool).to.be.true;
+  });
+
+  it("Should be able to check room availability and return false", () => {
+    let bool2 = customer2.checkRoomAvailability("2020/04/22", bookings, allRooms, "residential suite");
     expect(bool2).to.be.false
   });
+
 });
