@@ -73,8 +73,7 @@ let updateByDate = () => {
   
   // let availableRoomDetails = currCustomer.getAvailableRoomDetails(rooms.rooms)
   // renderRoomCards(availableRoomDetails);  
-  //debugger;
-  //currCustomer.id
+
   startUp(guestID);
   let currCustomer = new Customer(startUpData[1]);
   let rooms =  startUpData[2];
@@ -134,6 +133,7 @@ let bookRoom = (e) => {
     e.target.closest('button').setAttribute("disabled", "true");
     e.target.closest('button').innerText = "Booked!"
 
+    startUp(guestID);
   }
   //customer id is startUpArr[1].id
   //roomNumber is e.target.closest('button')
