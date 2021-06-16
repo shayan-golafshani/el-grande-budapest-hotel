@@ -19,7 +19,7 @@ export let hotelImage = document.getElementById('hotelImage');
 export let renderUserInfo = (currCustomer, bookings, rooms) => {
   
   guestName.innerText = currCustomer.name;
-  totalSpent.innerText = currCustomer.viewCustomerTotalSpending(bookings.bookings, rooms.rooms);
+  totalSpent.innerText = currCustomer.viewCustomerTotalSpending(bookings.bookings, rooms.rooms).toFixed(2);
   currCustomer.bookings.forEach(booking => {
     bookingHistory.innerHTML += `
         <p> Room number ${booking.roomNumber}</p>

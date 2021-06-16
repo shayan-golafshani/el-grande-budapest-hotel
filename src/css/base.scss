@@ -7,12 +7,9 @@ $main-radius:5px;
 $main-padding:5px;
 $font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 $grand-hotel: 'Grand Hotel', cursive;
-* {
-//font-family: $font-family;  
-}
+
 body {
   background: $primary-background;
-  // background: $tertiary-background;
 }
 .container {
   display: grid;
@@ -28,7 +25,7 @@ body {
 }
 nav {
   grid-area: nav;
-  background: pink;
+  background: white;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -47,7 +44,7 @@ main {
 }
 #sidebar {
   grid-area: sidebar;
- background: #FFCB05;
+ background: whitesmoke;
  border-radius: $main-radius;
   padding-top: $main-padding;
   overflow: scroll;
@@ -83,12 +80,15 @@ footer {
   width: 10%;
 }
 .hotel-title {
-  p:first-of-type {
+  h1 {
     font-family: $grand-hotel;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 900;
   }
-  color: rgb(194, 166, 27);
+  h2 {
+    font-size: 1.2rem;
+  }
+  color: rgb(154, 129, 4);
 }
 .hide {
   display: none;
@@ -108,42 +108,38 @@ footer {
   transform: translate(-50%, -50%,);
   background:rgba(234, 147, 249, 0.979);
   text-align: center;
+
       h1 {
       color: $secondary-background;
       text-transform: uppercase;
       text-decoration:underline; 
       font-weight: 500; 
       }
+
     input[type = "text"], input[type = "password"] {
       border: 0;
-      background: none;
       display: block;
       margin: 20 px auto;
       text-align: center;
-      border: 2px solid #3498db;
+      border: 2px solid black;
       padding: 14px 10px;
       width: 5rem;
       outline: none;
-      color: white;
+      color: black;
       border-radius: 12px;
         &:focus {
           width: 6.5rem;
+          color: black;
           border-color: #2ecc71;
         }
     }
-    #loginErrorArea {
-      // transform: scale(1.1, 1.1);
-      // transition: 0.2s;
-    }
+   
     #loginButton {
       border: 0;
-      //background: none;
       display: block;
       margin: 20px auto;
       text-align: center;
-      //border: 2px solid #2ecc71;
       padding: 14px 40px;
-      outline: none;
       color: $secondary-background;
       border-radius: 24px;
       transition: 0.2s;
@@ -219,20 +215,51 @@ footer {
     background: white;
   }
 }
-@media (max-width:550px) {
+@media (max-width:700px) {
   .container{
     grid-template-columns: 1fr;
-    grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr;
+    grid-template-rows: 0.4fr 0.8fr 1fr;
     grid-template-areas: 
     "nav"
     "sidebar"
-    "main"
-    "content1"
-    "content2"
-    "content3"
-    "footer";
+    "main";
+  
   }
-  footer {
-  flex-direction: column;
+ 
+  #sidebar {
+    height: 100%;
+    overflow: none;
   }
+  
+  nav {
+    grid-area: nav;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 5px;
+    padding-top: 5px;
+    height: 100%;
+  }
+
+   .box {
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    input[type=text], input[type=password] {
+      margin: 3rem auto;
+      padding: 14px 10px;
+      width: 26rem;
+   } 
+
+   aside {
+    height: fit-content;
+   }
+
+   main {
+     overflow: auto;
+   }
+}
+
 }
