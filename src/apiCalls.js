@@ -1,4 +1,4 @@
-import { loginButton, mainCardsArea } from "./domUpdates";
+import { hotelCheckInInfo, loginButton, mainCardsArea } from "./domUpdates";
 let baseUrl = 'http://localhost:3001/api/v1/'
 
 /////////NIK's re-implimented code/////////////////////////////////
@@ -9,6 +9,7 @@ const displayErrorMesssage = (err) => {
       ? "Our network temporarily is down due to cyber attacks. Please call us or email us @ thegrandbudapest@gmail.com"
       : err.message;
   errorField.innerHTML = message;
+  hotelCheckInInfo.classList.add('hide')
 };
 const disableLoginButton = () => {
   loginButton.setAttribute('disabled', 'true');
