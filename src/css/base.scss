@@ -44,8 +44,8 @@ main {
 }
 #sidebar {
   grid-area: sidebar;
- background: whitesmoke;
- border-radius: $main-radius;
+  background: whitesmoke;
+  border-radius: $main-radius;
   padding-top: $main-padding;
   overflow: scroll;
 }
@@ -217,49 +217,41 @@ footer {
 }
 @media (max-width:700px) {
   .container{
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.4fr 0.8fr 1fr;
-    grid-template-areas: 
-    "nav"
-    "sidebar"
-    "main";
-  
+    display: flex;
+    flex-direction: column;
   }
  
   #sidebar {
-    height: 100%;
-    overflow: none;
+    overflow: visible;
   }
   
-  nav {
-    grid-area: nav;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    border-radius: 5px;
-    padding-top: 5px;
-    height: 100%;
-  }
+  // nav {
+  //   grid-area: nav;
+  //   background: white;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: space-evenly;
+  //   align-items: center;
+  //   border-radius: 5px;
+  //   padding-top: 5px;
+  //   height: 100%;
+  // }
 
-   .box {
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-evenly;
-    input[type=text], input[type=password] {
-      margin: 3rem auto;
-      padding: 14px 10px;
-      width: 26rem;
-   } 
+  //  .box {
+  //   height: 100%;
+  //   flex-direction: column;
+  //   justify-content: space-evenly;
+  //   input[type=text], input[type=password] {
+  //     margin: 3rem auto;
+  //     padding: 14px 10px;
+  //     width: 26rem;
+  //  } 
 
-   aside {
-    height: fit-content;
-   }
+  //  aside {
+  //   //height: fit-content;
+  //  }
 
-   main {
-     overflow: auto;
-   }
-}
-
+  //  main {
+  //    height: 70vh;
+  //  }
 }
