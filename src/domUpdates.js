@@ -27,7 +27,6 @@ export let renderUserInfo = (currCustomer, bookings, rooms) => {
         
   let availableRoomDetails = currCustomer.getAvailableRoomDetails(rooms.rooms)
   renderRoomCards(availableRoomDetails);  
-
 }
 
 export let renderRoomCards = (array) => {

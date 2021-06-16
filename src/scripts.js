@@ -31,9 +31,6 @@ import {
   mainCardsArea,
 } from './domUpdates';
 
-let testingBtn = document.querySelector('#testButton');
-let searchForRoom = document.getElementById('sendIt');
-//put event listeners on here. 
 
 window.onload = startUp();
 let startUpData = [];
@@ -46,7 +43,7 @@ function startUp() {
       let rooms = promise[2];
       let bookings = promise[3];
       startUpData = [customers, currCustomer, rooms, bookings];
-      //console.log(promise);
+      console.log(promise);
       console.log(startUpData, "HEY your data on startup");
       currCustomer = new Customer(currCustomer);
 
@@ -58,24 +55,23 @@ function startUp() {
 calendar.addEventListener('change', () => updateByDate());
 roomDropDown.addEventListener('change', () => updateByRoomType());
 
-
-
 let updateByDate = () => {
-  let currCustomer = new Customer(startUpData[1]);
-  let bookings = startUpData[3];
-  let rooms =  startUpData[2];
-
-  let date = calendar.value.split("-").join('/')
+  // let bookings = startUpData[3];
   
-  currCustomer.filterRoomAvailabilityByDate(date, bookings.bookings);
-        
-  let availableRoomDetails = currCustomer.getAvailableRoomDetails(rooms.rooms)
-  renderRoomCards(availableRoomDetails);  
+  // let date = calendar.value.split("-").join('/')
+  
+  // currCustomer.filterRoomAvailabilityByDate(date, bookings.bookings);
+  
+  // let availableRoomDetails = currCustomer.getAvailableRoomDetails(rooms.rooms)
+  // renderRoomCards(availableRoomDetails);  
+  startUp()
+  let currCustomer = new Customer(startUpData[1]);
+  let rooms =  startUpData[2];
 
   //Filter based on the drop-down value
   if (roomDropDown.value) {
-    let filteredRoomsByType = currCustomer.filterRoomsByRoomType(
-      rooms.rooms, roomDropDown.value)
+    let filteredRoomsByType = currCustomer
+      .filterRoomsByRoomType(rooms.rooms, roomDropDown.value)
     renderRoomCards(filteredRoomsByType);
   }
 }
@@ -85,15 +81,14 @@ let updateByRoomType = () => {
   let rooms =  startUpData[2];
   let bookings = startUpData[3];
 
-
   let date = calendar.value.split("-").join('/');
   
 
   currCustomer.filterRoomAvailabilityByDate(date, bookings.bookings);
   //Filter based on the drop-down value
   if (roomDropDown.value) {
-    let filteredRoomsByType = currCustomer.filterRoomsByRoomType(
-      rooms.rooms, roomDropDown.value)
+    let filteredRoomsByType = currCustomer
+      .filterRoomsByRoomType(rooms.rooms, roomDropDown.value)
     renderRoomCards(filteredRoomsByType);
   } else {
     //otherwise show all rooms;
@@ -111,9 +106,6 @@ let bookRoom = (e) => {
     let userID = startUpData[1].id; //suss
     let date = calendar.value.split("-").join('/');
 
-    
-
-
     let postableData = {
       userID,
       date,
@@ -122,15 +114,16 @@ let bookRoom = (e) => {
 
     console.log(postableData);
     postData(postableData).then(
-        response => console.log(response)
+      response => console.log(response)
     ).catch(err => {
-        console.error(err);
+      console.error(err);
     })
 
     //console.log("This is the event", e.target.closest('button'));
     e.target.closest('button').setAttribute("disabled", "true");
     e.target.closest('button').innerText = "Booked!"
-}
+
+  }
 
 
 
