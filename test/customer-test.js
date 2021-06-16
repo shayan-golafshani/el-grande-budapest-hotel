@@ -7,7 +7,7 @@ import { allRooms } from '../src/test-data/room-data';
 import { bookings } from '../src/test-data/booking-data';
 import { Booking } from '../src/classes/Booking';
 
-describe.only('Customer', () => {
+describe('Customer', () => {
   let booking1, booking2, customer1, customer2;
   beforeEach(() => {
     let booking1 = new Booking(bookings[0]);

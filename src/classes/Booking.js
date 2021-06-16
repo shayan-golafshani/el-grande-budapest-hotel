@@ -7,8 +7,7 @@ export class Booking {
     this.roomServiceCharges = bookingInfo.roomServiceCharges || [];
   }
 
-  //May want to use a spread operator here later, so I can post multiple charges
-  //w/out iterating
+  //May use a spread operator later, so I can post charges w/out iterating
   addCharges(chargeAmount) {
     this.roomServiceCharges.push(chargeAmount);
   }
