@@ -28,7 +28,7 @@ body {
 }
 nav {
   grid-area: nav;
-  background: pink;
+  background: white;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -47,7 +47,7 @@ main {
 }
 #sidebar {
   grid-area: sidebar;
- background: #FFCB05;
+ background: whitesmoke;
  border-radius: $main-radius;
   padding-top: $main-padding;
   overflow: scroll;
@@ -83,12 +83,12 @@ footer {
   width: 10%;
 }
 .hotel-title {
-  p:first-of-type {
+  h1 {
     font-family: $grand-hotel;
     font-size: 2rem;
     font-weight: 900;
   }
-  color: rgb(194, 166, 27);
+  color: rgb(154, 129, 4);
 }
 .hide {
   display: none;
@@ -116,18 +116,19 @@ footer {
       }
     input[type = "text"], input[type = "password"] {
       border: 0;
-      background: none;
+      //background: none;
       display: block;
       margin: 20 px auto;
       text-align: center;
-      border: 2px solid #3498db;
+      border: 2px solid black;
       padding: 14px 10px;
       width: 5rem;
       outline: none;
-      color: white;
+      color: black;
       border-radius: 12px;
         &:focus {
           width: 6.5rem;
+          color: black;
           border-color: #2ecc71;
         }
     }
@@ -143,7 +144,7 @@ footer {
       text-align: center;
       //border: 2px solid #2ecc71;
       padding: 14px 40px;
-      outline: none;
+      //outline: none;
       color: $secondary-background;
       border-radius: 24px;
       transition: 0.2s;

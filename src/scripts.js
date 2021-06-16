@@ -40,10 +40,11 @@ import {
 
 
 //window.onload = startUp();
-window.onload = renderLoginSetup();
+window.onload = startUp(1);
 let startUpData = [];
-let guestID = null;
+let guestID = 1;
 
+//change everything for accessibility
 function startUp(userID) {
   retrieveData(userID)
     .then(promise => {
@@ -146,31 +147,31 @@ let bookRoom = (e) => {
 }
 
 
-loginButton.addEventListener('click', (e) => loginValidation(e));
-let loginValidation = (e) => {
-  e.preventDefault();
-  let usernameInput = usernameArea.value
-  let splitUsername =  usernameInput.split('r');
-  let passwordInput = passwordArea.value;
-  if (passwordInput === 'overlook2021' 
-    && splitUsername[0] === 'custome' 
-    && (splitUsername[1] >= 1 && splitUsername[1] <= 50)) {
-    guestID = splitUsername[1];
-    startUp(guestID);
-    loginErrorArea.classList.add('hide');
-    loginArea.classList.add('hide');
-    hotelImage.classList.add('hide');
-    hotelCheckInInfo.classList.remove('hide');
-    console.log('SUCCESSFUL LOGIN!');
-    //renderPage();
-  } else {
-    loginErrorArea.classList.remove('hide');
-  }
-}
+// loginButton.addEventListener('click', (e) => loginValidation(e));
+// let loginValidation = (e) => {
+//   e.preventDefault();
+//   let usernameInput = usernameArea.value
+//   let splitUsername =  usernameInput.split('r');
+//   let passwordInput = passwordArea.value;
+//   if (passwordInput === 'overlook2021' 
+//     && splitUsername[0] === 'custome' 
+//     && (splitUsername[1] >= 1 && splitUsername[1] <= 50)) {
+//     guestID = splitUsername[1];
+//     startUp(guestID);
+//     loginErrorArea.classList.add('hide');
+//     loginArea.classList.add('hide');
+//     hotelImage.classList.add('hide');
+//     hotelCheckInInfo.classList.remove('hide');
+//     console.log('SUCCESSFUL LOGIN!');
+//     //renderPage();
+//   } else {
+//     loginErrorArea.classList.remove('hide');
+//   }
+// }
 
-function renderLoginSetup() {
-  loginErrorArea.classList.add('hide');
-  //loginArea.classList.add('hide');
-  //hotelImage.classList.add('hide');
-  hotelCheckInInfo.classList.add('hide');
-}
+// function renderLoginSetup() {
+//   loginErrorArea.classList.add('hide');
+//   //loginArea.classList.add('hide');
+//   //hotelImage.classList.add('hide');
+//   hotelCheckInInfo.classList.add('hide');
+// }
