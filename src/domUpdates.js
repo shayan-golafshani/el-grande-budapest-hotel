@@ -8,6 +8,13 @@ export let calendar = document.getElementById('calendar');
 export let roomDropDown = document.getElementById('roomDropDown');
 export let bookingHistory = document.getElementById('bookingHistory');
 export let mainCardsArea = document.getElementById("mainCardsArea");
+export let loginArea = document.getElementById('loginArea')
+export let usernameArea = document.getElementById('username');
+export let passwordArea = document.getElementById('password');
+export let loginButton = document.getElementById('loginButton');
+export let loginErrorArea = document.getElementById('loginErrorArea');
+export let hotelCheckInInfo = document.getElementById('hotelCheckInInfo');
+export let hotelImage = document.getElementById('hotelImage');
 
 export let renderUserInfo = (currCustomer, bookings, rooms) => {
   

@@ -3,7 +3,6 @@ $primary-background: rgb(149, 97, 200);
 ;
 $secondary-background: radial-gradient(circle, rgba(234, 147, 249, 0.979) 0%, rgb(252, 70, 167) 100%);
 $tertiary-background:tan;
-
 $main-radius:5px;
 $main-padding:5px;
 $font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
@@ -11,13 +10,10 @@ $grand-hotel: 'Grand Hotel', cursive;
 * {
 //font-family: $font-family;  
 }
-
-
 body {
   background: $primary-background;
   // background: $tertiary-background;
 }
-
 .container {
   display: grid;
   height: 100vh;
@@ -30,7 +26,6 @@ body {
   "sidebar footer footer footer";
   gap: 0.4rem;
 }
-
 nav {
   grid-area: nav;
   background: pink;
@@ -40,7 +35,6 @@ nav {
   border-radius: $main-radius;
   padding-top: $main-padding;
 }
-
 main {
   color: white;
   grid-area: main;
@@ -51,7 +45,6 @@ main {
     width: 100%;
   }
 }
-
 #sidebar {
   grid-area: sidebar;
  background: #FFCB05;
@@ -59,21 +52,18 @@ main {
   padding-top: $main-padding;
   overflow: scroll;
 }
-
 #content1 {
  grid-area: content1;
  background: whitesmoke;
  border-radius: $main-radius;
   padding-top: $main-padding;
 }
-
 #content2 {
   grid-area: content2;
   background: whitesmoke;
   border-radius: $main-radius;
   padding-top: $main-padding;
 }
-
 #content3 {
   grid-area: content3;
   background: whitesmoke;
@@ -89,11 +79,9 @@ footer {
   flex-direction: row;
   justify-content: space-evenly;
 }
-
 #flag{
   width: 10%;
 }
-
 .hotel-title {
   p:first-of-type {
     font-family: $grand-hotel;
@@ -102,18 +90,15 @@ footer {
   }
   color: rgb(194, 166, 27);
 }
-
 .hide {
   display: none;
 }
-
 .sidebar {
   margin: 0;
   padding:  0;
   font-family: sans-serif;
   background: $primary-background;
 }
-
 .box {
   width: inherit;
   padding: 40px;
@@ -123,7 +108,6 @@ footer {
   transform: translate(-50%, -50%,);
   background:rgba(234, 147, 249, 0.979);
   text-align: center;
-
       h1 {
       color: $secondary-background;
       text-transform: uppercase;
@@ -147,13 +131,17 @@ footer {
           border-color: #2ecc71;
         }
     }
-    input[type = "submit"] {
+    #loginErrorArea {
+      // transform: scale(1.1, 1.1);
+      // transition: 0.2s;
+    }
+    #loginButton {
       border: 0;
-      background: none;
+      //background: none;
       display: block;
       margin: 20px auto;
       text-align: center;
-      border: 2px solid #2ecc71;
+      //border: 2px solid #2ecc71;
       padding: 14px 40px;
       outline: none;
       color: $secondary-background;
@@ -165,7 +153,6 @@ footer {
        }
     }
 }
-
 .grid-container {
   display: flex;
   flex-wrap: wrap;
@@ -174,7 +161,6 @@ footer {
   align-content: center;
   width: auto;
 }
-
 .grid-item {
   border-radius: 15px;
   background-color: gold ;
@@ -191,12 +177,10 @@ footer {
   transition: 1s;
    }
 }
-
 .room-image {
   width: 80%;
   opacity: 0.8;
 }
-
 .room-number,
 .room-type,
 .bidet-status,
@@ -206,21 +190,18 @@ footer {
   font-weight: bold;
   color: black;
  }
-
 .room-number,  .bidet-status, .bed-size {
   padding: .25rem;
   border-radius: 2rem;
   padding-bottom: 10px;
   background-color: #FFEB3B;
 }
-
 .room-type {
   padding: .25rem;
   font-size: 1.5rem;
   background-color: #FFEB3B;
   border-radius: 8rem;
 }
-
 .room-cost {
   padding: .25rem;
   font-weight: bolder;
@@ -231,7 +212,6 @@ footer {
   background: $secondary-background;
   color: black;
 }
-
 #booking-button {
   border-radius: 12px;
   cursor: pointer;
@@ -239,7 +219,6 @@ footer {
     background: white;
   }
 }
-
 @media (max-width:550px) {
   .container{
     grid-template-columns: 1fr;

@@ -29,14 +29,23 @@ import {
   renderUserInfo,
   renderRoomCards,
   mainCardsArea,
+  usernameArea,
+  passwordArea,
+  loginButton,
+  loginErrorArea,
+  loginArea,
+  hotelCheckInInfo,
+  hotelImage,
 } from './domUpdates';
 
 
-window.onload = startUp();
+//window.onload = startUp();
+window.onload = renderLoginSetup();
 let startUpData = [];
+let guestID = null;
 
-function startUp() {
-  retrieveData(1)
+function startUp(userID) {
+  retrieveData(userID)
     .then(promise => {
       let customers = promise[0];
       let currCustomer = promise[1];
@@ -64,7 +73,9 @@ let updateByDate = () => {
   
   // let availableRoomDetails = currCustomer.getAvailableRoomDetails(rooms.rooms)
   // renderRoomCards(availableRoomDetails);  
-  startUp()
+  //debugger;
+  //currCustomer.id
+  startUp(guestID);
   let currCustomer = new Customer(startUpData[1]);
   let rooms =  startUpData[2];
 
@@ -124,9 +135,6 @@ let bookRoom = (e) => {
     e.target.closest('button').innerText = "Booked!"
 
   }
-
-
-
   //customer id is startUpArr[1].id
   //roomNumber is e.target.closest('button')
   //date calendar.value.split("-").join('/')
@@ -135,4 +143,34 @@ let bookRoom = (e) => {
     { "userID": 48, "date": "2019/09/23", "roomNumber": 4 }
 
      */
+}
+
+
+loginButton.addEventListener('click', (e) => loginValidation(e));
+let loginValidation = (e) => {
+  e.preventDefault();
+  let usernameInput = usernameArea.value
+  let splitUsername =  usernameInput.split('r');
+  let passwordInput = passwordArea.value;
+  if (passwordInput === 'overlook2021' 
+    && splitUsername[0] === 'custome' 
+    && (splitUsername[1] >= 1 && splitUsername[1] <= 50)) {
+    guestID = splitUsername[1];
+    startUp(guestID);
+    loginErrorArea.classList.add('hide');
+    loginArea.classList.add('hide');
+    hotelImage.classList.add('hide');
+    hotelCheckInInfo.classList.remove('hide');
+    console.log('SUCCESSFUL LOGIN!');
+    //renderPage();
+  } else {
+    loginErrorArea.classList.remove('hide');
+  }
+}
+
+function renderLoginSetup() {
+  loginErrorArea.classList.add('hide');
+  //loginArea.classList.add('hide');
+  //hotelImage.classList.add('hide');
+  hotelCheckInInfo.classList.add('hide');
 }
